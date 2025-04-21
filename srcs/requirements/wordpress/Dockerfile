@@ -19,6 +19,8 @@ COPY tools/entrypoint.sh /wordpress/entrypoint.sh
 
 COPY conf/php.ini /etc/php83/php.ini
 
+COPY conf/www.conf /etc/php83/php-fpm.d/www.conf 
+
 RUN chmod +x /wordpress/entrypoint.sh
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar

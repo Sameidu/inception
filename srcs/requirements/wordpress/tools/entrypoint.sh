@@ -16,4 +16,4 @@ if [ ! -f "/wordpress/wp-config.php" ]; then
 	wp core install --url=$WP_URL --title=$WP_TITLE --admin_user=$WP_ADMIN --admin_email=$WP_ADMIN_EMAIL
 fi
 
-tail -f /dev/null
+exec php-fpm83 -F
