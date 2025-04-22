@@ -3,6 +3,7 @@ FROM alpine:3.20
 RUN apk update && apk add php \
  php-cli \
  php-fpm \
+ php-gd \
  php-opcache \
  php-mbstring \
  php-curl \
