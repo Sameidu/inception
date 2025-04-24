@@ -29,9 +29,26 @@ services:
       - wp_data:/wordpress
     networks:
       - services
+      - cache-wp
+
+  redis:
+    container_name: redis
+    build: ./requirements/bonus/redis
+    restart: always
+    env_file: .env
+    networks:
+      - cache-wp
+
+  adminer:
+    container_name: adminer
+    build: ./requirements/bonus/adminer
+    restart: always
+    networks:
+      - services
 
 networks:
   services:
+  cache-wp:
 
 volumes:
   mariadb_data:

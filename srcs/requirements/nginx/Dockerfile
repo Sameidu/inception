@@ -1,7 +1,6 @@
 FROM	alpine:3.20
 
 RUN apk update && \
- apk upgrade && \
  apk add nginx openssl
 
 RUN	mkdir /keys && cd /keys && openssl req -newkey rsa:4096 \
@@ -13,11 +12,7 @@ RUN	mkdir /keys && cd /keys && openssl req -newkey rsa:4096 \
             -keyout example.key \
             -subj "/C=ES/ST=Madrid/L=Madrid/O=42Madrid/OU=42Madrid/CN=smeixoei.42.fr"
 
-RUN	mkdir /app
-
 COPY	conf/nginx.conf /etc/nginx/nginx.conf
-
-COPY	index.html /app/index.html
 
 EXPOSE	443
 
