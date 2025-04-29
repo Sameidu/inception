@@ -1,0 +1,21 @@
+# sshd_config para contenedor SFTP aislado
+
+Port 22
+Protocol 2
+
+PermitRootLogin no
+PasswordAuthentication yes
+PermitEmptyPasswords no
+
+
+AllowTcpForwarding no
+X11Forwarding no
+
+Subsystem sftp internal-sftp
+
+Match Group sftp
+    ChrootDirectory %h
+    ForceCommand internal-sftp
+    AllowTcpForwarding no
+    X11Forwarding no
+

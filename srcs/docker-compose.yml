@@ -46,6 +46,42 @@ services:
     networks:
       - services
 
+  sftp:
+    container_name: sftp
+    build: ./requirements/bonus/sftp
+    env_file: .env
+    restart: always
+    ports:
+      - 2222:22
+    volumes:
+      - wp_data:/home/${SFTP_USER}/wordpress
+    networks:
+      - services
+
+  cockpit:
+    container_name: cockpit
+    build: ./requirements/bonus/cockpit
+    env_file: .env
+    restart: always
+    networks:
+      - services
+    privileged: true
+    ports:
+      - 9090:9090
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DOCKER_GID=108
+   
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce:latest
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock 
+    networks:
+      - services
+      
 networks:
   services:
   cache-wp:
