@@ -75,7 +75,7 @@ services:
    
   portainer:
     container_name: portainer
-    image: portainer/portainer-ce:latest
+    build: ./requirements/bonus/portainer 
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock 
