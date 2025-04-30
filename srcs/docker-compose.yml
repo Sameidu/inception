@@ -8,7 +8,11 @@ services:
     volumes:
       - wp_data:/wordpress
     networks:
-      - services
+      - wp-nginx
+      - static
+      - port-nginx
+      - ad-nginx
+      - sftp
 
   mariadb:
     container_name: mariadb
@@ -18,7 +22,8 @@ services:
     volumes:
       - mariadb_data:/var/lib/mysql
     networks:
-      - services
+      - ad-db
+      - wp-db
 
   wordpress:
     container_name: wp
@@ -28,8 +33,9 @@ services:
     volumes:
       - wp_data:/wordpress
     networks:
-      - services
+      - wp-nginx
       - cache-wp
+      - wp-db
 
   redis:
     container_name: redis
@@ -44,7 +50,8 @@ services:
     build: ./requirements/bonus/adminer
     restart: always
     networks:
-      - services
+      - ad-nginx
+      - ad-db
 
   sftp:
     container_name: sftp
@@ -56,23 +63,8 @@ services:
     volumes:
       - wp_data:/home/${SFTP_USER}/wordpress
     networks:
-      - services
+      - sftp
 
-  cockpit:
-    container_name: cockpit
-    build: ./requirements/bonus/cockpit
-    env_file: .env
-    restart: always
-    networks:
-      - services
-    privileged: true
-    ports:
-      - 9090:9090
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      - DOCKER_GID=108
-   
   portainer:
     container_name: portainer
     build: ./requirements/bonus/portainer 
@@ -80,11 +72,25 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock 
     networks:
-      - services
+      - port-nginx
+
+  staticweb:
+    container_name: staticweb
+    build: ./requirements/bonus/staticweb
+    expose:
+      - 80
+    networks:
+      - static
       
 networks:
-  services:
   cache-wp:
+  static:
+  sftp:
+  wp-nginx:
+  port-nginx:
+  ad-db:
+  ad-nginx:
+  wp-db:
 
 volumes:
   mariadb_data:

@@ -1,5 +1,3 @@
-# sshd_config para contenedor SFTP aislado
-
 Port 22
 Protocol 2
 
@@ -18,4 +16,3 @@ Match Group sftp
     ForceCommand internal-sftp
     AllowTcpForwarding no
     X11Forwarding no
-
