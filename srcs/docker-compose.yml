@@ -97,13 +97,13 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/sameidu/data/mariadb_data
+      device: /home/smeixoei/data/mariadb_data
       o: bind
 
   wp_data:
     driver: local
     driver_opts:
       type: none
-      device: /home/sameidu/data/wp_data
+      device: /home/smeixoei/data/wp_data
       o: bind
 
