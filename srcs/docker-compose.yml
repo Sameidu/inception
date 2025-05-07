@@ -5,6 +5,9 @@ services:
     ports:
       - 443:443
     restart: always
+    depends_on:
+      wordpress:
+        condition: service_healthy
     volumes:
       - wp_data:/wordpress
     networks:
@@ -19,6 +22,11 @@ services:
     build: ./requirements/mariadb/
     env_file: .env
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "ps -a | grep mysqld | grep -v grep"]
+      interval: 2s
+      retries: 20
+      start_period: 2s
     volumes:
       - mariadb_data:/var/lib/mysql
     networks:
@@ -30,6 +38,14 @@ services:
     build: ./requirements/wordpress/
     restart: always
     env_file: .env
+    healthcheck:
+      test: ["CMD-SHELL", "ps -a | grep php-fpm83 | grep -v grep"]
+      interval: 2s
+      retries: 20
+      start_period: 2s
+    depends_on:
+      mariadb:
+        condition: service_healthy
     volumes:
       - wp_data:/wordpress
     networks:

@@ -13,7 +13,7 @@ done
 
 if [ ! -f "/wordpress/wp-config.php" ]; then
 	wp config create --dbname=$MYSQL_DATABASE --dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWORD --dbhost=$MYSQL_HOST
-	wp core install --url=$WP_URL --title=$WP_TITLE --admin_user=$WP_ADMIN --admin_email=$WP_ADMIN_EMAIL
+	wp core install --url=$WP_URL --title=$WP_TITLE --admin_user=$WP_ADMIN --admin_password=$WP_PASS --admin_email=$WP_ADMIN_EMAIL
 	wp user create $WP_USER $WP_EMAIL --role=administrator --user_pass=$WP_PASS
 	wp theme install astra
 	wp theme install oceanwp
