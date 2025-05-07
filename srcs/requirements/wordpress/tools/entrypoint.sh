@@ -20,6 +20,7 @@ if [ ! -f "/wordpress/wp-config.php" ]; then
 	wp theme install twentytwenty  --activate
 	wp theme install variations
 	wp theme install spexo
+#	wp search-replace 'localhost' 'smeixoei.42.fr' --all-tables --precise --recurse-objects
 	sed -i "93idefine( 'WP_REDIS_HOST', 'redis' );" /wordpress/wp-config.php
 	sed -i "94idefine( 'WP_REDIS_PORT', 6379 );" /wordpress/wp-config.php 
 	wp plugin install redis-cache --activate

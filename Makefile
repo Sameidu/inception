@@ -36,10 +36,8 @@ adminer:
 sftp:
 	docker exec -it sftp sh
 
-clean:
-	sudo rm -rf $(DATA_DIR)
-
-fclean:	clean
+fclean: stop
+	sudo rm -rf $(DATA_DIR)	
 	docker system prune -a --volumes -f 
 
 re: fclean start
