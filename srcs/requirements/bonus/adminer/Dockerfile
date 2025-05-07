@@ -6,6 +6,6 @@ COPY conf/www.conf /etc/php83/php-fpm.d/www.conf
 
 WORKDIR /adminer
 
-RUN wget -O adminer.php https://github.com/vrana/adminer/releases/download/v5.2.1/adminer-5.2.1.php
+RUN wget -O adminer.php https://github.com/vrana/adminer/releases/download/v5.3.0/adminer-5.3.0.php 
 
 CMD [ "php-fpm83", "-F" ]

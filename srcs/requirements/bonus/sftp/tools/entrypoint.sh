@@ -1,7 +1,5 @@
 #!/bin/sh
 
-#!/bin/sh
-
 addgroup -g 1001 -S sftp || true
 
 adduser -h /home/$SFTP_USER -s /sbin/nologin -G sftp -D $SFTP_USER
